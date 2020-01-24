@@ -96,9 +96,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#------------------------------------------startup------------------------------------------
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
+figlet -w 100 hello~ $(whoami)
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+#------------------------------------------envirment------------------------------------------
 export GOPATH=/Users/liuwangchen/work/go/gopath
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN:~/bin:$HOME/.pub-cache/bin:/usr/local/Cellar/pkg-config/0.29.2/bin:
@@ -111,6 +115,8 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export DRACULA_THEME=/Users/liuwangchen/work/bash/zsh
 export EDITOR='/usr/local/bin/nvim'
+
+#------------------------------------------alias------------------------------------------
 alias ll='ls -lh'
 alias sf='shfmt -w'
 alias update='source ~/.zshrc'
@@ -131,23 +137,23 @@ alias kub='kubectl'
 alias kcn='kubectl config set-context $(kub config current-context) --namespace'
 alias gogogo='/Users/liuwangchen/work/go/gogogo/tool/gogogo.sh'
 alias et='etcdctl'
-alias c='clear'
 alias ra='ranger'
 alias nv='nvim'
-alias vim='nvim'
 alias f='fzf'
-figlet -w 100 hello~ $(whoami)
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+alias c='clear'
+alias s='neofetch --color_blocks off'
+alias vim='nvim'
+alias vi='nvim'
 
 #------------------------------------------fzf------------------------------------------
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --bind alt-k:down,alt-i:up --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (ccat --color=always {} || highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500"'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --bind alt-k:down,alt-i:up --exact'
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
 --color fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,hl+:#A3BE8C
 --color pointer:#A3BE8C,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
 '
-export FZF_COMPLETETION_TRIGGER='\'
-# fh - repeat history
+export FZF_COMPLETION_TRIGGER='**'
+
 fk() {
   local pid
   pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
@@ -157,6 +163,10 @@ fk() {
     echo $pid | xargs kill -${1:-9}
   fi
 }
+fh() {
+  $(history | f -m |awk -F " " '{for(i=2;i<=NF;i++){ printf("%s ",$i);} printf("\n")}')
+}
+
 j() {
     if [[ "$#" -ne 0 ]]; then
         cd $(autojump $@)
@@ -168,3 +178,10 @@ j() {
 #------------------------------------------zsh bindkey------------------------------------------
 bindkey '^[i' up-line-or-search
 bindkey '^[k' down-line-or-search
+
+#------------------------------------------function------------------------------------------
+json() {
+  if [[ "$#" -ne 0 ]]; then
+      echo $@ | jq .
+  fi
+}
