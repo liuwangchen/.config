@@ -21,6 +21,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
 let mapleader=" "
 set number
 set norelativenumber
@@ -47,9 +48,19 @@ set foldmethod=indent
 set foldlevel=99
 set laststatus=2
 set autochdir
+set ttyfast "should make scrolling faster
+set lazyredraw "same as above
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" ===============LEADER
+noremap <LEADER><CR> :nohlsearch<CR>
+noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
+" Press space twice to jump to the next '<++>' and edit it
+noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+noremap <LEADER>sc :set spell!<CR>
 
+
+" ===================map
 noremap j h
 noremap J 5h
 noremap i k
@@ -59,14 +70,18 @@ noremap K 5j
 noremap L 5l
 noremap e i
 noremap E I
-noremap <LEADER><CR> :nohlsearch<CR>
-noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 map <C-s> :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
-map ; :
 map h 0
+map ; $
+" Call figlet
+noremap tx :r !figlet 
+" Copy to system clipboard
+vnoremap Y "+y
+
+
 " ==============split
 map sl :set splitright<CR>:vsplit<CR>
 map sj :set nosplitright<CR>:vsplit<CR>
@@ -89,6 +104,7 @@ map tu :tabe<CR>
 map tp :-tabnext<CR>
 map tn :+tabnext<CR>
 
+" ==================plugin
 call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
 Plug 'vim-airline/vim-airline'
@@ -101,6 +117,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
+Plug 'junegunn/vim-peekaboo'
 call plug#end()
 
 " ===
