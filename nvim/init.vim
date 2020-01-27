@@ -48,8 +48,6 @@ set foldmethod=indent
 set foldlevel=99
 set laststatus=2
 set autochdir
-set ttyfast "should make scrolling faster
-set lazyredraw "same as above
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " ===============LEADER
@@ -74,8 +72,6 @@ noremap E I
 map <C-s> :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
-map h 0
-map ; $
 " Call figlet
 noremap tx :r !figlet 
 " Copy to system clipboard
@@ -118,6 +114,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 Plug 'junegunn/vim-peekaboo'
+Plug 'tomasiser/vim-code-dark'
 call plug#end()
 
 " ===
@@ -135,6 +132,10 @@ let NERDTreeMapJumpLastChild = "K"
 let NERDTreeMapJumpFirstChild = "I"
 map tj <C-w>h
 map tl <C-w>l
+""当NERDTree为剩下的唯一窗口时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""打开vim时自动打开NERDTree
+" autocmd vimenter * NERDTree
 
 
 " ==
@@ -157,4 +158,13 @@ let g:NERDTreeIndicatorMapCustom = {
 " ===
 nnoremap ra :Ranger<CR>
 let g:ranger_map_keys = 0
+
+" ====================================theme
+"
+let g:codedark_conservative = 1
+colorscheme codedark
+let g:airline_theme = 'codedark'
+set t_Co=256
+set t_ut=
+let g:codedark_term256=1
 
