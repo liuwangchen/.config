@@ -100,6 +100,8 @@ map tu :tabe<CR>
 map tp :-tabnext<CR>
 map tn :+tabnext<CR>
 
+
+
 " ==================plugin
 call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
@@ -117,6 +119,10 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'tomasiser/vim-code-dark'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'AndrewRadev/switch.vim' " gs to switch
+Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
+Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plug 'MattesGroeger/vim-bookmarks'
 call plug#end()
 
 " ===
@@ -166,9 +172,58 @@ let g:ranger_map_keys = 0
 " ===
 " === FZF
 " ===
-nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <Leader>h :History<CR>
+nnoremap <silent> ff :Files<CR>
+nnoremap <silent> fh :History<CR>
+nnoremap <silent> fa :Ag<CR>
+nnoremap <silent> fb :Buffers<CR>
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(
+  \   '',
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%', '?'),
+  \   <bang>0)
+
+" ====================================commenter
+let g:NERDSpaceDelims=1
+
+" =====================================mark
+let g:bookmark_sign = '♥'
+
+" Compile function
+noremap r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'c'
+		exec "!g++ % -o %<"
+		exec "!time ./%<"
+	elseif &filetype == 'cpp'
+		set splitbelow
+		exec "!g++ -std=c++11 % -Wall -o %<"
+		:sp
+		:res -15
+		:term ./%<
+	elseif &filetype == 'java'
+		exec "!javac %"
+		exec "!time java %<"
+	elseif &filetype == 'sh'
+		:!time bash %
+	elseif &filetype == 'python'
+		set splitbelow
+		:sp
+		:term python3 %
+	elseif &filetype == 'html'
+		silent! exec "!".g:mkdp_browser." % &"
+	elseif &filetype == 'markdown'
+		exec "MarkdownPreview"
+	elseif &filetype == 'tex'
+		silent! exec "VimtexStop"
+		silent! exec "VimtexCompile"
+	elseif &filetype == 'go'
+		set splitbelow
+		:sp
+		:term go run %
+	endif
+endfunc
 
 " ====================================theme
 "
@@ -178,4 +233,5 @@ let g:airline_theme = 'codedark'
 set t_Co=256
 set t_ut=
 let g:codedark_term256=1
+
 
