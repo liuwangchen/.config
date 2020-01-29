@@ -115,12 +115,15 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 Plug 'junegunn/vim-peekaboo'
 Plug 'tomasiser/vim-code-dark'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " ===
 " === NERDTree
 " ===
-map tt :NERDTreeToggle<CR>
+nmap tt :NERDTreeToggle<CR>
+nmap tc :NERDTreeCWD<CR>
 let NERDTreeMenuDown = "k"
 let NERDTreeMenuUp = "i"
 let NERDTreeMapOpenSplit = ""
@@ -130,13 +133,14 @@ let NERDTreeMapCloseDir = "j"
 let NERDTreeMapCloseChildren = "J"
 let NERDTreeMapJumpLastChild = "K"
 let NERDTreeMapJumpFirstChild = "I"
-map tj <C-w>h
-map tl <C-w>l
+nmap tj <C-w>h
+nmap tl <C-w>l
 ""当NERDTree为剩下的唯一窗口时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 ""打开vim时自动打开NERDTree
 " autocmd vimenter * NERDTree
-
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " ==
 " == NERDTree-git
@@ -158,6 +162,13 @@ let g:NERDTreeIndicatorMapCustom = {
 " ===
 nnoremap ra :Ranger<CR>
 let g:ranger_map_keys = 0
+
+" ===
+" === FZF
+" ===
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>h :History<CR>
 
 " ====================================theme
 "
