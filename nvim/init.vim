@@ -120,18 +120,16 @@ noremap K 5j
 noremap L 5l
 noremap e i
 noremap E I
-imap ∆ <Left>
-imap ¬ <Right>
-
+imap  <Left>
 
 map <C-s> :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
 " Call figlet
 noremap tx :r !figlet
-" Copy to system clipboard
-vnoremap Y "+y
-
+" Clipboard
+" vnoremap Y "+y
+set clipboard=unnamed
 
 " ==============split
 map sl :set splitright<CR>:vsplit<CR>
@@ -143,8 +141,8 @@ map <LEADER>j <C-w>h
 map <LEADER>i <C-w>k
 map <LEADER>k <C-w>j
 map <LEADER>v <C-v>
-map <up> :res +5<CR>
-map <down> :res -5<CR>
+" map <up> :res +5<CR>
+" map <down> :res -5<CR>
 map <left> :vertical resize+5<CR>
 map <right> :vertical resize-5<CR>
 map sv <C-w>t<C-w>H
@@ -154,6 +152,7 @@ map sh <C-w>t<C-w>K
 map tu :tabe<CR>
 map tp :-tabnext<CR>
 map tn :+tabnext<CR>
+map tc :tabclose<CR>
 
 
 
@@ -175,7 +174,6 @@ Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to 
 " ===
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 nmap tt :NERDTreeToggle<CR>
-nmap tc :NERDTreeCWD<CR>
 let NERDTreeMenuDown = "k"
 let NERDTreeMenuUp = "i"
 let NERDTreeMapOpenSplit = ""
@@ -223,7 +221,7 @@ let g:ranger_map_keys = 0
 " ===
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-nnoremap <silent> ^[f :Files<CR>
+nnoremap <silent> ff :Files<CR>
 nnoremap <silent> fh :History<CR>
 nnoremap <silent> fa :Ag<CR>
 nnoremap <silent> fb :Buffers<CR>
@@ -275,7 +273,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-j> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
