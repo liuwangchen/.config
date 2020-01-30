@@ -1,4 +1,4 @@
-  
+
 " __  ____   __  _   ___     _____ __  __ ____   ____
 "|  \/  \ \ / / | \ | \ \   / /_ _|  \/  |  _ \ / ___|
 "| |\/| |\ V /  |  \| |\ \ / / | || |\/| | |_) | |
@@ -21,34 +21,86 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" General {{{
+set nocompatible
 
-let mapleader=" "
-set number
-set norelativenumber
-set cursorline
+scriptencoding utf-8
+set fileencodings=utf-8
+set termencoding=utf-8
+set encoding=utf-8
+
+set autowrite
+set autoread
+set hidden
+
+" Backup
+set nobackup
+set directory=/tmp//
+
+" Match and search
 set hlsearch
-exec "nohlsearch"
-set incsearch
 set ignorecase
 set smartcase
-let &t_ut=''
-set mouse=a
-set encoding=utf-8
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set list
-set listchars=tab:▸\ ,trail:▫
-set scrolloff=5
-set tw=0
-set indentexpr=
-set backspace=indent,eol,start
-set foldmethod=indent
-set foldlevel=99
+set incsearch
+" Visual {{{
+set t_Co=256
+
+set number
+
 set laststatus=2
-set autochdir
+
+set splitbelow
+set splitright
+
+set mousehide
+set mouse=a
+
+set cursorline
+
+set winminheight=0
+
+set virtualedit=onemore
+
+set noerrorbells
+set vb t_vb=
+if has("autocmd") && has("gui")
+	au GUIEnter * set t_vb=
+endif
+
+set completeopt=
+
+set nofoldenable
+let mapleader=" "
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" Auto reload
+au FocusGained * :checktime
+
+" Update time
+set updatetime=300
+
+" Syntax
+syntax on
+"}}}
+
+" Formatting {{{
+set fo+=o
+set fo-=r
+set fo-=t
+
+set backspace=indent,eol,start
+
+set smarttab
+set smartindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+
+set autoindent
+set cindent
+set cinoptions=:s,ps,ts,cs
+set cinwords=if,else,while,do,for,switch,case
+"}}}
 
 " ===============LEADER
 noremap <LEADER><CR> :nohlsearch<CR>
@@ -68,12 +120,15 @@ noremap K 5j
 noremap L 5l
 noremap e i
 noremap E I
+imap ∆ <Left>
+imap ¬ <Right>
+
 
 map <C-s> :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
 " Call figlet
-noremap tx :r !figlet 
+noremap tx :r !figlet
 " Copy to system clipboard
 vnoremap Y "+y
 
@@ -109,25 +164,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'liuchengxu/space-vim-theme'
-
-" File navigation
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 Plug 'junegunn/vim-peekaboo'
 Plug 'tomasiser/vim-code-dark'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'AndrewRadev/switch.vim' " gs to switch
-Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
-Plug 'MattesGroeger/vim-bookmarks'
-call plug#end()
+
 
 " ===
 " === NERDTree
 " ===
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 nmap tt :NERDTreeToggle<CR>
 nmap tc :NERDTreeCWD<CR>
 let NERDTreeMenuDown = "k"
@@ -151,6 +197,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " ==
 " == NERDTree-git
 " ==
+Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -166,13 +213,17 @@ let g:NERDTreeIndicatorMapCustom = {
 " ===
 " === Ranger.vim
 " ===
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 nnoremap ra :Ranger<CR>
 let g:ranger_map_keys = 0
 
 " ===
 " === FZF
 " ===
-nnoremap <silent> ff :Files<CR>
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+nnoremap <silent> ^[f :Files<CR>
 nnoremap <silent> fh :History<CR>
 nnoremap <silent> fa :Ag<CR>
 nnoremap <silent> fb :Buffers<CR>
@@ -184,10 +235,93 @@ command! -bang -nargs=* Ag
   \   <bang>0)
 
 " ====================================commenter
+Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 let g:NERDSpaceDelims=1
 
 " =====================================mark
+Plug 'MattesGroeger/vim-bookmarks'
 let g:bookmark_sign = '♥'
+
+
+
+" =======================================coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd :call CocActionAsync('jumpDefinition')<CR>
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window
+nnoremap <silent> sd :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <LEADER>rn <Plug>(coc-rename)
+" nmap <M-j>f <Plug>(coc-format)
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+Plug 'sbdchd/neoformat'
+let g:neoformat_try_formatprg = 1
+let g:neoformat_basic_format_align = 0
+let g:neoformat_basic_format_retab = 0
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_enabled_go = ['goimports', 'gofmt']
+nmap <LEADER>f :Neoformat<CR>
+
+call plug#end()
+
+
+
+
+
+
+
+
+
+
 
 " Compile function
 noremap r :call CompileRunGcc()<CR>
@@ -210,6 +344,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'python'
 		set splitbelow
 		:sp
+    :res -15
 		:term python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
@@ -221,10 +356,11 @@ func! CompileRunGcc()
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp
-    :res -10
+    :res -15
 		:term go run %
 	endif
 endfunc
+
 
 " ====================================theme
 "
@@ -234,5 +370,4 @@ let g:airline_theme = 'codedark'
 set t_Co=256
 set t_ut=
 let g:codedark_term256=1
-
 
