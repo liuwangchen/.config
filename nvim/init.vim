@@ -21,6 +21,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" ===
+" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
+" ===
+let has_machine_specific_file = 1
+source ~/.config/nvim/special.vim
 " General {{{
 set nocompatible
 
@@ -72,6 +77,8 @@ set completeopt=
 set nofoldenable
 let mapleader=" "
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" Auto change directory to current dir
+" autocmd BufEnter * silent! lcd %:p:h
 " Auto reload
 au FocusGained * :checktime
 
@@ -120,8 +127,9 @@ noremap K 5j
 noremap L 5l
 noremap e i
 noremap E I
+" find and replace
+noremap \s :%s//g<left><left>
 imap  <Left>
-
 map <C-s> :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
@@ -161,8 +169,8 @@ call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'bling/vim-bufferline'
-Plug 'liuchengxu/space-vim-theme'
+" some plug
+" some plug
 Plug 'junegunn/vim-peekaboo'
 Plug 'tomasiser/vim-code-dark'
 Plug 'AndrewRadev/switch.vim' " gs to switch
@@ -175,7 +183,7 @@ Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 nmap tt :NERDTreeToggle<CR><LEADER>l
 nmap tf :NERDTreeFind<CR>
-nmap tr :NERDTreeCWD<CR>
+nmap tr :NERDTreeCWD<CR><LEADER>l
 let NERDTreeMenuDown = "k"
 let NERDTreeMenuUp = "i"
 let NERDTreeMapOpenSplit = ""
@@ -223,7 +231,9 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <silent> ff :Files<CR>
 nnoremap <silent> fh :History<CR>
+nnoremap <silent> fc :History:<CR>
 nnoremap <silent> fa :Ag<CR>
+nnoremap <silent> fs :BLines<CR>
 nnoremap <silent> fb :Buffers<CR>
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(
@@ -231,6 +241,39 @@ command! -bang -nargs=* Ag
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
+
+let $FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --bind alt-k:down,alt-i:up --exact'
+" 打开 fzf 的方式选择 floating window
+let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+function! OpenFloatingWin()
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  " 设置浮动窗口打开的位置，大小等。
+  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': height * 0.3,
+        \ 'col': col + 30,
+        \ 'width': width * 2 / 3,
+        \ 'height': height / 2
+        \ }
+
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+
+  " 设置浮动窗口高亮
+  call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+  setlocal
+        \ buftype=nofile
+        \ nobuflisted
+        \ bufhidden=hide
+        \ nonumber
+        \ norelativenumber
+        \ signcolumn=no
+endfunction
 
 " ====================================commenter
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
@@ -273,7 +316,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-j> coc#refresh()
+inoremap <silent><expr> <c-j> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -307,8 +350,18 @@ let g:neoformat_basic_format_align = 0
 let g:neoformat_basic_format_retab = 0
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_enabled_go = ['goimports', 'gofmt']
-nmap <LEADER>f :Neoformat<CR>
+nmap <leader>f :Neoformat<CR>
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+let g:tex_flavor = "latex"
+inoremap <c-p> <nop>
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsSnippetDirectories = ['ultiSnips']
+silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 call plug#end()
 
 
