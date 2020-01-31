@@ -150,9 +150,9 @@ map sh <C-w>t<C-w>K
 
 " ================tab
 map tu :tabe<CR>
-map tp :-tabnext<CR>
-map tn :+tabnext<CR>
-map tc :tabclose<CR>
+map tj :-tabnext<CR>
+map tl :+tabnext<CR>
+map tq :tabclose<CR>
 
 
 
@@ -173,7 +173,9 @@ Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to 
 " === NERDTree
 " ===
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-nmap tt :NERDTreeToggle<CR>
+nmap tt :NERDTreeToggle<CR><LEADER>l
+nmap tf :NERDTreeFind<CR>
+nmap tr :NERDTreeCWD<CR>
 let NERDTreeMenuDown = "k"
 let NERDTreeMenuUp = "i"
 let NERDTreeMapOpenSplit = ""
@@ -183,8 +185,6 @@ let NERDTreeMapCloseDir = "j"
 let NERDTreeMapCloseChildren = "J"
 let NERDTreeMapJumpLastChild = "K"
 let NERDTreeMapJumpFirstChild = "I"
-nmap tj <C-w>h
-nmap tl <C-w>l
 ""当NERDTree为剩下的唯一窗口时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 ""打开vim时自动打开NERDTree
@@ -273,7 +273,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-j> coc#refresh()
+" inoremap <silent><expr> <c-j> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
