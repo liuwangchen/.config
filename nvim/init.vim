@@ -140,10 +140,10 @@ noremap tx :r !figlet
 set clipboard=unnamed
 
 " ==============split
-" map sl :set splitright<CR>:vsplit<CR>
-" map sj :set nosplitright<CR>:vsplit<CR>
-" map sk :set splitbelow<CR>:split<CR>
-" map si :set nosplitbelow<CR>:split<CR>
+map sl :set splitright<CR>:vsplit<CR>
+map sj :set nosplitright<CR>:vsplit<CR>
+map sk :set splitbelow<CR>:split<CR>
+map si :set nosplitbelow<CR>:split<CR>
 map <LEADER>l <C-w>l
 map <LEADER>j <C-w>h
 map <LEADER>i <C-w>k
@@ -360,6 +360,7 @@ silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 
 " Editor Enhancement
 Plug 'junegunn/vim-peekaboo'
+Plug 'lambdalisue/suda.vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
