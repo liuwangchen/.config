@@ -140,10 +140,10 @@ noremap tx :r !figlet
 set clipboard=unnamed
 
 " ==============split
-map sl :set splitright<CR>:vsplit<CR>
-map sj :set nosplitright<CR>:vsplit<CR>
-map sk :set splitbelow<CR>:split<CR>
-map si :set nosplitbelow<CR>:split<CR>
+" map sl :set splitright<CR>:vsplit<CR>
+" map sj :set nosplitright<CR>:vsplit<CR>
+" map sk :set splitbelow<CR>:split<CR>
+" map si :set nosplitbelow<CR>:split<CR>
 map <LEADER>l <C-w>l
 map <LEADER>j <C-w>h
 map <LEADER>i <C-w>k
@@ -169,12 +169,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" some plug
-" some plug
-Plug 'junegunn/vim-peekaboo'
-Plug 'tomasiser/vim-code-dark'
-Plug 'AndrewRadev/switch.vim' " gs to switch
-Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+
 
 
 " ===
@@ -362,6 +357,19 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 let g:UltiSnipsSnippetDirectories = ['ultiSnips']
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
+
+" Editor Enhancement
+Plug 'junegunn/vim-peekaboo'
+Plug 'tomasiser/vim-code-dark'
+Plug 'AndrewRadev/switch.vim' " gs to switch
+Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plug 'jiangmiao/auto-pairs'
+" ===
+" === vim-easymotion
+" ===
+Plug 'easymotion/vim-easymotion'
+nmap ,w <Plug>(easymotion-w)
+nmap ,b <Plug>(easymotion-b)
 call plug#end()
 
 
