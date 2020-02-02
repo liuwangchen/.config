@@ -149,8 +149,8 @@ map <LEADER>j <C-w>h
 map <LEADER>i <C-w>k
 map <LEADER>k <C-w>j
 map <LEADER>v <C-v>
-" map <up> :res +5<CR>
-" map <down> :res -5<CR>
+map <up> :res +5<CR>
+map <down> :res -5<CR>
 map <left> :vertical resize+5<CR>
 map <right> :vertical resize-5<CR>
 map sv <C-w>t<C-w>H
@@ -371,6 +371,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 nmap ,w <Plug>(easymotion-w)
 nmap ,b <Plug>(easymotion-b)
+hi link EasyMotionTarget search
 call plug#end()
 
 
