@@ -372,6 +372,10 @@ Plug 'easymotion/vim-easymotion'
 nmap ,w <Plug>(easymotion-w)
 nmap ,b <Plug>(easymotion-b)
 hi link EasyMotionTarget search
+
+Plug 'voldikss/vim-floaterm'
+let g:floaterm_position = 'center'
+nnoremap tn :FloatermNew<CR>
 call plug#end()
 
 
