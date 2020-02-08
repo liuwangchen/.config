@@ -127,6 +127,9 @@ noremap K 5j
 noremap L 5l
 noremap e i
 noremap E I
+noremap h e
+noremap H E
+noremap <Space> <nop>
 " find and replace
 noremap \s :%s//g<left><left>
 imap  <Left>
@@ -224,12 +227,12 @@ let g:ranger_map_keys = 0
 " ===
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-nnoremap <silent> ff :Files<CR>
-nnoremap <silent> fh :History<CR>
-nnoremap <silent> fc :History:<CR>
-nnoremap <silent> fa :Ag<CR>
-nnoremap <silent> fs :BLines<CR>
-nnoremap <silent> fb :Buffers<CR>
+nnoremap <silent> mff :Files<CR>
+nnoremap <silent> mfh :History<CR>
+nnoremap <silent> mfc :History:<CR>
+nnoremap <silent> mfa :Ag<CR>
+nnoremap <silent> mfs :BLines<CR>
+nnoremap <silent> mfb :Buffers<CR>
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(
   \   '',
@@ -369,8 +372,8 @@ Plug 'jiangmiao/auto-pairs'
 " === vim-easymotion
 " ===
 Plug 'easymotion/vim-easymotion'
-nmap ,w <Plug>(easymotion-w)
-nmap ,b <Plug>(easymotion-b)
+nmap mw <Plug>(easymotion-w)
+nmap mb <Plug>(easymotion-b)
 hi link EasyMotionTarget search
 
 Plug 'voldikss/vim-floaterm'
