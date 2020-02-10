@@ -412,7 +412,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'python'
 		set splitbelow
 		:sp
-    :res -15
+        :res -15
 		:term python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
@@ -424,7 +424,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp
-    :res -15
+        :res -10
 		:term go run %
 	endif
 endfunc
