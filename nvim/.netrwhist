@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/Users/liuwangchen/.config/nvim/autoload'
+let g:netrw_dirhist_7='/Users/liuwangchen/.config'
+let g:netrw_dirhist_6='/Users/liuwangchen/.config/nvim/autoload'
 let g:netrw_dirhist_5='/Users/liuwangchen/.config/nvim'
 let g:netrw_dirhist_4='/Users/liuwangchen/work/go/gogogo/gogogo.geoserver'
 let g:netrw_dirhist_3='/Users/liuwangchen/work/go/gogogo/gogogo.geoserver/src/web/controller'

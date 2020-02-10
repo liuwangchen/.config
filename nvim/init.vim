@@ -227,12 +227,12 @@ let g:ranger_map_keys = 0
 " ===
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-nnoremap <silent> mff :Files<CR>
-nnoremap <silent> mfh :History<CR>
-nnoremap <silent> mfc :History:<CR>
-nnoremap <silent> mfa :Ag<CR>
-nnoremap <silent> mfs :BLines<CR>
-nnoremap <silent> mfb :Buffers<CR>
+nnoremap <silent> ff :Files<CR>
+nnoremap <silent> fh :History<CR>
+nnoremap <silent> fc :History:<CR>
+nnoremap <silent> fa :Ag<CR>
+nnoremap <silent> fs :BLines<CR>
+nnoremap <silent> fb :Buffers<CR>
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(
   \   '',
@@ -277,7 +277,7 @@ endfunction
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 let g:NERDSpaceDelims=1
 
-" =====================================mark
+" =====================================mark ma mp mn
 Plug 'MattesGroeger/vim-bookmarks'
 let g:bookmark_sign = '♥'
 
@@ -439,3 +439,6 @@ set t_Co=256
 set t_ut=
 let g:codedark_term256=1
 
+" xp 调换字母位置  
+" ddp调换两个行的位置 
+" ha快速跳到当前单词最后并进入插入模式
