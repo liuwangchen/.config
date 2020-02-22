@@ -130,6 +130,7 @@ noremap E I
 noremap h e
 noremap H E
 noremap <Space> <nop>
+noremap ! :!
 " find and replace
 noremap \s :%s//g<left><left>
 imap  <Left>
