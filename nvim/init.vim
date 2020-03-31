@@ -131,10 +131,15 @@ noremap h e
 noremap H E
 noremap <Space> <nop>
 noremap ! :!
+map ci ce
+map yi ye
+map di de
+map vi de
+
 " find and replace
 noremap \s :%s//g<left><left>
 imap  <Left>
-noremap <C-s> :w<CR>
+noremap s :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
 " Call figlet
@@ -143,11 +148,6 @@ noremap tx :r !figlet
 " vnoremap Y "+y
 set clipboard=unnamed
 
-" ==============split
-map sl :set splitright<CR>:vsplit<CR>
-map sj :set nosplitright<CR>:vsplit<CR>
-map sk :set splitbelow<CR>:split<CR>
-map si :set nosplitbelow<CR>:split<CR>
 map <LEADER>l <C-w>l
 map <LEADER>j <C-w>h
 map <LEADER>i <C-w>k
@@ -157,8 +157,6 @@ map <up> :res +5<CR>
 map <down> :res -5<CR>
 map <left> :vertical resize+5<CR>
 map <right> :vertical resize-5<CR>
-map sv <C-w>t<C-w>H
-map sh <C-w>t<C-w>K
 
 " ================tab
 map tu :tabe<CR>

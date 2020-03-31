@@ -125,6 +125,10 @@ noremap h e
 noremap H E
 noremap <Space> <nop>
 noremap ! :!
+map ci ce
+map yi ye
+map di de
+map vi de
 " find and replace
 noremap \s :%s//g<left><left>
 imap  <Left>
