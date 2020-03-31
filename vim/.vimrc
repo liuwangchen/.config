@@ -176,6 +176,7 @@ Plug 'jiangmiao/auto-pairs'
 " === vim-easymotion
 " ===
 Plug 'easymotion/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
 nmap mw <Plug>(easymotion-w)
 nmap mb <Plug>(easymotion-b)
 hi link EasyMotionTarget search
