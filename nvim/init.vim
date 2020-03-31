@@ -134,7 +134,7 @@ noremap ! :!
 " find and replace
 noremap \s :%s//g<left><left>
 imap  <Left>
-map <C-s> :w<CR>
+noremap <C-s> :w<CR>
 map q :q<CR>
 map R :source ~/.config/nvim/init.vim<CR>
 " Call figlet
@@ -231,7 +231,6 @@ Plug 'junegunn/fzf.vim'
 nnoremap <silent> ff :Files<CR>
 nnoremap <silent> fh :History<CR>
 nnoremap <silent> fc :History:<CR>
-nnoremap <silent> fa :Ag<CR>
 nnoremap <silent> fs :BLines<CR>
 nnoremap <silent> fb :Buffers<CR>
 command! -bang -nargs=* Ag
