@@ -131,10 +131,11 @@ noremap h e
 noremap H E
 noremap <Space> <nop>
 noremap ! :!
+
 map ci ce
 map yi ye
 map di de
-map vi de
+map vi ve
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -437,6 +438,6 @@ set t_Co=256
 set t_ut=
 let g:codedark_term256=1
 
-" xp 调换字母位置  
-" ddp调换两个行的位置 
+" xp 调换字母位置
+" ddp调换两个行的位置
 " ha快速跳到当前单词最后并进入插入模式
