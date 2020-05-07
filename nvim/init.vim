@@ -114,7 +114,7 @@ noremap <LEADER><CR> :nohlsearch<CR>
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
-noremap <LEADER>sc :set spell!<CR>
+" noremap <LEADER>sc :set spell!<CR>
 
 
 " ===================map
@@ -227,10 +227,10 @@ let g:ranger_map_keys = 0
 " ===
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-nnoremap <silent> ff :Files<CR>
+nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> fh :History<CR>
 nnoremap <silent> fc :History:<CR>
-nnoremap <silent> fs :BLines<CR>
+nnoremap <silent> <leader>s :BLines<CR>
 nnoremap <silent> fb :Buffers<CR>
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(
@@ -347,7 +347,7 @@ let g:neoformat_basic_format_align = 0
 let g:neoformat_basic_format_retab = 0
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_enabled_go = ['goimports', 'gofmt']
-nmap <leader>f :Neoformat<CR>
+" nmap <leader>f :Neoformat<CR>
 
 " Snippets
 Plug 'SirVer/ultisnips'
