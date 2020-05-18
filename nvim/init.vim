@@ -146,7 +146,7 @@ map R :source ~/.config/nvim/init.vim<CR>
 " Call figlet
 noremap tx :r !figlet
 " Clipboard
-" vnoremap Y "+y
+vnoremap <C-c> "+y
 set clipboard=unnamed
 
 map <LEADER>l <C-w>l
