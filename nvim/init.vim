@@ -232,6 +232,7 @@ nnoremap <silent> fh :History<CR>
 nnoremap <silent> fc :History:<CR>
 nnoremap <silent> <leader>s :BLines<CR>
 nnoremap <silent> fb :Buffers<CR>
+nnoremap <silent> <leader>u :Ag<CR>
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(
   \   '',
