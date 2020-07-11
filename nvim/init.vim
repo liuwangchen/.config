@@ -131,6 +131,7 @@ noremap h e
 noremap H E
 noremap <Space> <nop>
 noremap ! :!
+noremap ; A
 
 map ci ce
 map yi ye
