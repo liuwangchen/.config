@@ -1,0 +1,16 @@
+[user]
+	name = 瑞雯
+	email = liuwch@yoozoo.com
+[core]
+	excludesfile = /Users/liuwangchen/.gitignore_global
+[commit]
+	template = /Users/liuwangchen/.stCommitMsg
+[alias]
+	st = status
+	ci = commit
+	sm = submodule
+	la = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ll = log -10 --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ck = checkout
+[pull]
+	rebase = false

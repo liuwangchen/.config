@@ -1,0 +1,13 @@
+bind generic k move-down
+bind generic K move-half-page-down
+bind generic i move-up
+bind generic I move-half-page-up
+bind main    G move-last-line
+bind generic G move-last-line
+bind generic g  none
+bind generic gg move-first-line
+# 重设 main-view，增加 commit Id 信息
+set main-view = date:default author:abbreviated id:yes,color \
+                line-number:no,interval=1 \
+                commit-title:graph=v2,refs=yes,overflow=no
+

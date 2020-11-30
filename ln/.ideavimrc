@@ -1,0 +1,60 @@
+let mapleader=" "
+
+noremap j h
+noremap J 6h
+noremap i k
+noremap I 6k
+noremap k j
+noremap K 6j
+noremap L 6l
+noremap e i
+noremap E I
+noremap h e
+noremap H E
+noremap ; A
+
+map ci ce
+map yi ye
+map di de
+map vi ve
+nnoremap s :w<CR>
+map q :q<CR>
+
+nnoremap <Leader>a :action GotoAction<CR>
+vnoremap <Leader>a :action GotoAction<CR>
+nnoremap <Leader>f :action GotoFile<CR>
+vnoremap <Leader>f :action GotoFile<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gu :action GotoSuperMethod<CR>
+nnoremap rn :action RenameElement<CR>
+nnoremap <Leader>s :action FileStructurePopup<CR>
+vnoremap <Leader>s :action FileStructurePopup<CR>
+vnoremap <Leader>cc :action CommentByLineComment<CR>
+nnoremap tf :action SelectInProjectView<CR>
+vnoremap tf :action SelectInProjectView<CR>
+nnoremap <Leader>p :action ParameterInfo<CR>
+vnoremap <Leader>p :action ParameterInfo<CR>
+nnoremap ml :action GotoLine<CR>
+nnoremap <leader>u :action GotoSymbol<CR>
+vnoremap <leader>u :action GotoSymbol<CR>
+vnoremap th :action SplitVertically<CR>
+nnoremap th :action SplitVertically<CR>
+nnoremap tl :action NextSplitter<CR>
+nnoremap tj :action PrevSplitter<CR>
+nnoremap rs :action Stop<CR>
+vnoremap rs :action Stop<CR>
+nnoremap <leader>. :action ShowIntentionActions<CR>
+vnoremap <leader>. :action ShowIntentionActions<CR>
+nnoremap <leader>i :action ImplementMethods<CR>
+nnoremap r<enter> :action Run<CR>
+nnoremap <leader>w :action ManageRecentProjects<CR>
+vnoremap <leader>w :action ManageRecentProjects<CR>
+nnoremap tt :action ActivateProjectToolWindow<CR>
+vnoremap tt :action ActivateProjectToolWindow<CR>
+nnoremap <leader>j :action RecentFiles<CR>
+vnoremap <leader>j :action RecentFiles<CR>
+nnoremap <leader>d :action QuickJavaDoc<CR>
+vnoremap <leader>d :action QuickJavaDoc<CR>
+vnoremap gh :action Vcs.ShowTabbedFileHistory<CR>
+nnoremap gh :action Vcs.ShowTabbedFileHistory<CR>
